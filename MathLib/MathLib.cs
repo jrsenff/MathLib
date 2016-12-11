@@ -1,4 +1,16 @@
-﻿using System;
+﻿/****************************** Module Header ******************************\
+Module Name:  MathLib.cs
+Project:      MathLib
+Author:       Jerold Senff
+Updated:      12/11/2016
+
+MathLib:
+Some math functions in C#.
+Used with separate MathLib.UnitTests project.
+Used with separate ApiTest harness project.
+\***************************************************************************/
+
+using System;
 
 namespace MathLib
 {

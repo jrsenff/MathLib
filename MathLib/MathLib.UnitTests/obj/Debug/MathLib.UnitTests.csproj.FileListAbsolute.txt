@@ -5,3 +5,10 @@ D:\Dev\GitHub\ReflectionDiscovery\MathLib\MathLib.UnitTests\bin\Debug\MathLib.pd
 D:\Dev\GitHub\ReflectionDiscovery\MathLib\MathLib.UnitTests\obj\Debug\MathLib.UnitTests.csprojResolveAssemblyReference.cache
 D:\Dev\GitHub\ReflectionDiscovery\MathLib\MathLib.UnitTests\obj\Debug\MathLib.UnitTests.dll
 D:\Dev\GitHub\ReflectionDiscovery\MathLib\MathLib.UnitTests\obj\Debug\MathLib.UnitTests.pdb
+D:\Dev\GitHub\MathLib\MathLib\MathLib.UnitTests\bin\Debug\MathLib.UnitTests.dll
+D:\Dev\GitHub\MathLib\MathLib\MathLib.UnitTests\bin\Debug\MathLib.UnitTests.pdb
+D:\Dev\GitHub\MathLib\MathLib\MathLib.UnitTests\bin\Debug\MathLib.dll
+D:\Dev\GitHub\MathLib\MathLib\MathLib.UnitTests\bin\Debug\MathLib.pdb
+D:\Dev\GitHub\MathLib\MathLib\MathLib.UnitTests\obj\Debug\MathLib.UnitTests.csprojResolveAssemblyReference.cache
+D:\Dev\GitHub\MathLib\MathLib\MathLib.UnitTests\obj\Debug\MathLib.UnitTests.dll
+D:\Dev\GitHub\MathLib\MathLib\MathLib.UnitTests\obj\Debug\MathLib.UnitTests.pdb
