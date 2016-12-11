@@ -1,0 +1,5 @@
+D:\Dev\GitHub\ReflectionDiscovery\MathLib\bin\Debug\MathLib.dll
+D:\Dev\GitHub\ReflectionDiscovery\MathLib\bin\Debug\MathLib.pdb
+D:\Dev\GitHub\ReflectionDiscovery\MathLib\obj\Debug\MathLib.csprojResolveAssemblyReference.cache
+D:\Dev\GitHub\ReflectionDiscovery\MathLib\obj\Debug\MathLib.dll
+D:\Dev\GitHub\ReflectionDiscovery\MathLib\obj\Debug\MathLib.pdb
