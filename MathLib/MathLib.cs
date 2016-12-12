@@ -42,9 +42,9 @@ namespace MathLib
         public static double ArithmeticMean(int[] vals)
         {
             if (vals == null)
-                throw new ArgumentException("Int array cannot be null", "vals");
+                throw new Exception("Int array cannot be null");
             else if (vals.Length < 2)
-                throw new ArgumentException("More than 1 integer required", "vals");
+                throw new Exception("More than 1 integer required");
 
             double sum = 0.0;
 
@@ -62,9 +62,9 @@ namespace MathLib
         public static double GeometricMean(params int[] vals)
         {
             if (vals == null)
-                throw new ArgumentException("Int array cannot be null", "vals");
+                throw new Exception("Int array cannot be null");
             else if (vals.Length < 3)
-                throw new ArgumentException("More than 2 integers required", "vals");
+                throw new Exception("More than 2 integers required");
 
             double prod = 1.0;
 
@@ -82,9 +82,9 @@ namespace MathLib
         public static double HarmonicMean(params int[] vals)
         {
             if (vals == null)
-                throw new ArgumentException("Int array cannot be null", "vals");
+                throw new Exception("Int array cannot be null");
             else if (vals.Length < 3)
-                throw new ArgumentException("More than 2 integers required", "vals");
+                throw new Exception("More than 2 integers required");
 
             double sum = 0;
             double positive = double.PositiveInfinity;
@@ -93,7 +93,6 @@ namespace MathLib
             foreach (int v in vals)
             {
                 sum += 1.0d / v;
-                Console.WriteLine(sum);
             }
 
             if (sum == positive || sum == negative)
