@@ -27,7 +27,7 @@ namespace MathLib.UnitTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException), "More than 2 integers required")]
+        [ExpectedException(typeof(Exception), "More than 2 integers required")]
         public void Less_Than_Three_Numbers_Returns_Exception()
         {
             int[] vals = { 1, 4 };
@@ -37,7 +37,7 @@ namespace MathLib.UnitTests
 
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException), "Int array cannot be null")]
+        [ExpectedException(typeof(Exception), "Int array cannot be null")]
         public void Null_Returns_Exception()
         {
             int[] vals = null;
