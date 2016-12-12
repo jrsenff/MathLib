@@ -1,11 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/****************************** Module Header ******************************\
+
+Module Name:  Harness.cs
+Project:      ApiTest
+Author:       Jerold Senff
+Updated:      12/12/2016
+
+ApiTest:
+Tests the API functionality of the MathLib project.
+
+\***************************************************************************/
+
+using System;
 using System.IO;
 using System.Windows.Forms;
-using MathLib;
 
 namespace ApiTest
 {
@@ -226,6 +233,8 @@ namespace ApiTest
                 Console.WriteLine("  Error data: " + ex.Data);
                 Console.WriteLine("  Error source: " + ex.Source);
             }
+            Console.WriteLine("\n\nDone!");
+            Console.WriteLine("\nPress Enter to continue...");
             Console.ReadLine();
         }
 
@@ -308,7 +317,6 @@ namespace ApiTest
             Console.WriteLine("\tFail = " + numFail);
             Console.WriteLine("\nTotal Test Cases Not Run = " + numNotRun);
             Console.WriteLine("\nPercent passed = " + percent.ToString("P"));
-            Console.WriteLine("\nPress Enter to exit");
             return elapsedTime;
         }
 
