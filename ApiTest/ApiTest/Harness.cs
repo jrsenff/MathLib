@@ -1,11 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/****************************** Module Header ******************************\
+
+Module Name:  Harness.cs
+Project:      ApiTest
+Author:       Jerold Senff
+Updated:      12/12/2016
+
+ApiTest:
+Tests the API functionality of the MathLib project.
+
+\***************************************************************************/
+
+using System;
 using System.IO;
 using System.Windows.Forms;
-using MathLib;
 
 namespace ApiTest
 {
@@ -24,6 +31,12 @@ namespace ApiTest
                 char[] separators = new char[] { '#', ':', '!', ';', '@', '$', '%', '*', '&' };
                 double actual = 0.0;
                 int numPass = 0, numFail = 0, numCases = 0, numNotRun = 0;
+                string expectedException;
+
+                string invalidDivsion = "Invalid division";
+                string nullArray = "Int array cannot be null";
+                string minTwoNums = "More than 1 integer required";
+                string minThreeNums = "More than 2 integers required";
 
                 // Open the test case file
                 Console.WriteLine("Select a .TXT file containing test cases...");
@@ -80,8 +93,21 @@ namespace ApiTest
                             input[i] = int.Parse(tempInput[i]);
                         }
                     }
-                    if (parts[3] == "Exception")
+                    if (parts[3].Contains("Exception"))
                     {
+                        string[] exType = parts[3].Split(' ');
+
+                        if (exType[1] == "invalidDivision")
+                            expectedException = invalidDivsion;
+                        else if (exType[1] == "nullArray")
+                            expectedException = nullArray;
+                        else if (exType[1] == "minTwoNums")
+                            expectedException = minTwoNums;
+                        else if (exType[1] == "minThreeNums")
+                            expectedException = minThreeNums;
+                        else
+                            expectedException = "";
+
                         if (parts[1] == "ArithmeticMean")
                         {
                             try
@@ -90,10 +116,20 @@ namespace ApiTest
                             }
                             catch (Exception ex)
                             {
-                                WriteExceptionPassToConsole(caseID, method, ex);
-                                WriteExceptionPassToFile(sw, caseID, method, ex);
-                                ++numPass;
-                                ++numCases;
+                                if (ex.ToString().Contains(expectedException))
+                                {
+                                    WriteExceptionPassToConsole(caseID, method, ex);
+                                    WriteExceptionPassToFile(sw, caseID, method, ex);
+                                    ++numPass;
+                                    ++numCases;
+                                }
+                                else
+                                {
+                                    WriteExceptionFailToConsole(caseID, method);
+                                    WriteExceptionFailToFile(sw, caseID, method);
+                                    ++numFail;
+                                    ++numCases;
+                                }
                                 continue;
                             }
                         }
@@ -105,10 +141,20 @@ namespace ApiTest
                             }
                             catch (Exception ex)
                             {
-                                WriteExceptionPassToConsole(caseID, method, ex);
-                                WriteExceptionPassToFile(sw, caseID, method, ex);
-                                ++numPass;
-                                ++numCases;
+                                if (ex.ToString().Contains(expectedException))
+                                {
+                                    WriteExceptionPassToConsole(caseID, method, ex);
+                                    WriteExceptionPassToFile(sw, caseID, method, ex);
+                                    ++numPass;
+                                    ++numCases;
+                                }
+                                else
+                                {
+                                    WriteExceptionFailToConsole(caseID, method);
+                                    WriteExceptionFailToFile(sw, caseID, method);
+                                    ++numFail;
+                                    ++numCases;
+                                }
                                 continue;
                             }
                         }
@@ -120,10 +166,20 @@ namespace ApiTest
                             }
                             catch (Exception ex)
                             {
-                                WriteExceptionPassToConsole(caseID, method, ex);
-                                WriteExceptionPassToFile(sw, caseID, method, ex);
-                                ++numPass;
-                                ++numCases;
+                                if (ex.ToString().Contains(expectedException))
+                                {
+                                    WriteExceptionPassToConsole(caseID, method, ex);
+                                    WriteExceptionPassToFile(sw, caseID, method, ex);
+                                    ++numPass;
+                                    ++numCases;
+                                }
+                                else
+                                {
+                                    WriteExceptionFailToConsole(caseID, method);
+                                    WriteExceptionFailToFile(sw, caseID, method);
+                                    ++numFail;
+                                    ++numCases;
+                                }
                                 continue;
                             }
                         }
@@ -226,6 +282,8 @@ namespace ApiTest
                 Console.WriteLine("  Error data: " + ex.Data);
                 Console.WriteLine("  Error source: " + ex.Source);
             }
+            Console.WriteLine("\n\nDone!");
+            Console.WriteLine("\nPress Enter to continue...");
             Console.ReadLine();
         }
 
@@ -308,7 +366,6 @@ namespace ApiTest
             Console.WriteLine("\tFail = " + numFail);
             Console.WriteLine("\nTotal Test Cases Not Run = " + numNotRun);
             Console.WriteLine("\nPercent passed = " + percent.ToString("P"));
-            Console.WriteLine("\nPress Enter to exit");
             return elapsedTime;
         }
 
