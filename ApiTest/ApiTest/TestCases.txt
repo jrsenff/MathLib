@@ -19,8 +19,8 @@
 0019:ArithmeticMean:1:Exception minTwoNums
 0020:GeometricMean:4 2:Exception minThreeNums
 0021:HarmonicMean:3 8:Exception minThreeNums
-0022:ArithmeticMean:1 2 3 4:Exception TestFail
-0023:GeometricMean:3 4 2 4:Exception TestFail
-0024:HarmonicMean:0 2 6 9:Exception TestFail
-0025:TotallyMean:7 7 2 9:Exception TestFail
+0022:ArithmeticMean:1 2 3 4:Exception IntentionalFail
+0023:GeometricMean:3 4 2 4:Exception IntentionalFail
+0024:HarmonicMean:0 2 6 9:Exception IntentionalFail
+0025:TotallyMean:7 7 2 9:Exception IntentionalFail
 

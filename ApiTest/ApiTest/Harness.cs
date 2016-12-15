@@ -3,10 +3,17 @@
 Module Name:  Harness.cs
 Project:      ApiTest
 Author:       Jerold Senff
-Updated:      12/12/2016
+Updated:      12/14/2016
 
 ApiTest:
 Tests the API functionality of the MathLib project.
+
+Harness.cs reads tests cases from a text file using a streaming model.  This
+is my version of James D. MacCaffrey's chapter 1 example program, ApiTest, 
+from .NET Test Automation Recipes (2006, Apress).  I added functionality
+to the MathLib math function library, complete with MSTEST unit tests.
+This harness checks the type of exception returned by MathLib against an 
+expected exception value.
 
 \***************************************************************************/
 
