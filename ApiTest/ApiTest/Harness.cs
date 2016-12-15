@@ -106,7 +106,7 @@ namespace ApiTest
                         else if (exType[1] == "minThreeNums")
                             expectedException = minThreeNums;
                         else
-                            expectedException = "";
+                            expectedException = "Unknown: " + exType[1];
 
                         if (parts[1] == "ArithmeticMean")
                         {
@@ -118,15 +118,15 @@ namespace ApiTest
                             {
                                 if (ex.ToString().Contains(expectedException))
                                 {
-                                    WriteExceptionPassToConsole(caseID, method, ex);
-                                    WriteExceptionPassToFile(sw, caseID, method, ex);
+                                    WriteExceptionPassToConsole(caseID, method, ex.Message.ToString());
+                                    WriteExceptionPassToFile(sw, caseID, method, ex.Message.ToString());
                                     ++numPass;
                                     ++numCases;
                                 }
                                 else
                                 {
-                                    WriteExceptionFailToConsole(caseID, method);
-                                    WriteExceptionFailToFile(sw, caseID, method);
+                                    WriteExceptionFailToConsole(caseID, method, expectedException);
+                                    WriteExceptionFailToFile(sw, caseID, method, expectedException);
                                     ++numFail;
                                     ++numCases;
                                 }
@@ -143,15 +143,15 @@ namespace ApiTest
                             {
                                 if (ex.ToString().Contains(expectedException))
                                 {
-                                    WriteExceptionPassToConsole(caseID, method, ex);
-                                    WriteExceptionPassToFile(sw, caseID, method, ex);
+                                    WriteExceptionPassToConsole(caseID, method, ex.Message.ToString());
+                                    WriteExceptionPassToFile(sw, caseID, method, ex.Message.ToString());
                                     ++numPass;
                                     ++numCases;
                                 }
                                 else
                                 {
-                                    WriteExceptionFailToConsole(caseID, method);
-                                    WriteExceptionFailToFile(sw, caseID, method);
+                                    WriteExceptionFailToConsole(caseID, method, expectedException);
+                                    WriteExceptionFailToFile(sw, caseID, method, expectedException);
                                     ++numFail;
                                     ++numCases;
                                 }
@@ -168,23 +168,23 @@ namespace ApiTest
                             {
                                 if (ex.ToString().Contains(expectedException))
                                 {
-                                    WriteExceptionPassToConsole(caseID, method, ex);
-                                    WriteExceptionPassToFile(sw, caseID, method, ex);
+                                    WriteExceptionPassToConsole(caseID, method, ex.Message.ToString());
+                                    WriteExceptionPassToFile(sw, caseID, method, ex.Message.ToString());
                                     ++numPass;
                                     ++numCases;
                                 }
                                 else
                                 {
-                                    WriteExceptionFailToConsole(caseID, method);
-                                    WriteExceptionFailToFile(sw, caseID, method);
+                                    WriteExceptionFailToConsole(caseID, method, expectedException);
+                                    WriteExceptionFailToFile(sw, caseID, method, expectedException);
                                     ++numFail;
                                     ++numCases;
                                 }
                                 continue;
                             }
                         }
-                        WriteExceptionFailToConsole(caseID, method);
-                        WriteExceptionFailToFile(sw, caseID, method);
+                        WriteExceptionFailToConsole(caseID, method, expectedException);
+                        WriteExceptionFailToFile(sw, caseID, method, expectedException);
                         ++numFail;
                         ++numCases;
                     }
@@ -197,8 +197,8 @@ namespace ApiTest
                             actual = MathLib.MathLib.ArithmeticMean(input);
                             if (actual.ToString("F4") == expected)
                             {
-                                WritePassResultToConsole(caseID, method, expected, ref actual);
-                                WritePassResultToFile(sw, caseID, method, expected, ref actual);
+                                WritePassResultToConsole(caseID, method, expected, actual);
+                                WritePassResultToFile(sw, caseID, method, expected, actual);
                                 ++numPass;
                             }
                             else
@@ -214,8 +214,8 @@ namespace ApiTest
                             actual = MathLib.MathLib.GeometricMean(input);
                             if (actual.ToString("F4") == expected)
                             {
-                                WritePassResultToConsole(caseID, method, expected, ref actual);
-                                WritePassResultToFile(sw, caseID, method, expected, ref actual);
+                                WritePassResultToConsole(caseID, method, expected, actual);
+                                WritePassResultToFile(sw, caseID, method, expected, actual);
                                 ++numPass;
                             }
                             else
@@ -231,8 +231,8 @@ namespace ApiTest
                             actual = MathLib.MathLib.HarmonicMean(input);
                             if (actual.ToString("F4") == expected)
                             {
-                                WritePassResultToConsole(caseID, method, expected, ref actual);
-                                WritePassResultToFile(sw, caseID, method, expected, ref actual);
+                                WritePassResultToConsole(caseID, method, expected, actual);
+                                WritePassResultToFile(sw, caseID, method, expected, actual);
                                 ++numPass;
                             }
                             else
@@ -267,8 +267,8 @@ namespace ApiTest
                 }
 
                 // Output the test run results
-                elapsedTime = WriteTestRunResultToConsole(numPass, numFail, numNotRun, percent, elapsedTime);
-                elapsedTime = WriteTestRunResultsToFile(sw, numPass, numFail, numNotRun, percent, elapsedTime);
+                WriteTestRunResultToConsole(numPass, numFail, numNotRun, percent, elapsedTime);
+                WriteTestRunResultsToFile(sw, numPass, numFail, numNotRun, percent, elapsedTime);
 
                 // Close all the streams down
                 sr.Close();
@@ -296,14 +296,14 @@ namespace ApiTest
             sw.WriteLine("==========================================================================" + Environment.NewLine);
         }
 
-        private static void WriteExceptionFailToFile(StreamWriter sw, string caseID, string method)
+        private static void WriteExceptionFailToFile(StreamWriter sw, string caseID, string method, string ex)
         {
-            sw.WriteLine(caseID + "\t*FAIL*\t" + method + "\tNo exception thrown");
+            sw.WriteLine(caseID + "\t*FAIL*\t" + method + "\tNo exception" + "\t" + ex);
         }
 
-        private static void WriteExceptionPassToFile(StreamWriter sw, string caseID, string method, Exception ex)
+        private static void WriteExceptionPassToFile(StreamWriter sw, string caseID, string method, string ex)
         {
-            sw.WriteLine(caseID + "\tPass\t" + method + "\tException:\t" + ex.Message);
+            sw.WriteLine(caseID + "\tPass\t" + method + "\tException:\t" + ex);
         }
 
         private static void WriteTestNotRunToFile(StreamWriter sw, string caseID, string method, string expected)
@@ -311,7 +311,7 @@ namespace ApiTest
             sw.WriteLine(caseID + "\tNot Run\t" + method + "\t" + expected + "\t\t" + "Not yet implemented");
         }
 
-        private static TimeSpan WriteTestRunResultsToFile(StreamWriter sw, int numPass, int numFail, int numNotRun, double percent, TimeSpan elapsedTime)
+        private static void WriteTestRunResultsToFile(StreamWriter sw, int numPass, int numFail, int numNotRun, double percent, TimeSpan elapsedTime)
         {
             sw.WriteLine(Environment.NewLine + "============================= End Test Run ===============================");
             sw.WriteLine(Environment.NewLine + "Elapsed time = " + elapsedTime.ToString());
@@ -320,7 +320,6 @@ namespace ApiTest
             sw.WriteLine("\tFail = " + numFail);
             sw.WriteLine(Environment.NewLine + "Total Test Cases Not Run = " + numNotRun);
             sw.WriteLine(Environment.NewLine + "Percent passed = " + percent.ToString("P"));
-            return elapsedTime;
         }
 
         private static void WriteFailResultToFile(StreamWriter sw, string caseID, string method, string expected, double actual)
@@ -328,7 +327,7 @@ namespace ApiTest
             sw.WriteLine(caseID + "\t*FAIL*\t" + method + "\t" + expected + "\t\t" + actual.ToString("F4"));
         }
 
-        private static void WritePassResultToFile(StreamWriter sw, string caseID, string method, string expected, ref double actual)
+        private static void WritePassResultToFile(StreamWriter sw, string caseID, string method, string expected, double actual)
         {
             sw.WriteLine(caseID + "\tPass\t" + method + "\t" + expected + "\t\t" + actual.ToString("F4"));
         }
@@ -342,14 +341,14 @@ namespace ApiTest
             Console.WriteLine("==========================================================================\n");
         }
 
-        private static void WriteExceptionFailToConsole(string caseID, string method)
+        private static void WriteExceptionFailToConsole(string caseID, string method, string ex)
         {
-            Console.WriteLine(caseID + "\t*FAIL*\t" + method + "\tNo exception thrown");
+            Console.WriteLine(caseID + "\t*FAIL*\t" + method + "\tNo exception" + "\t" + ex);
         }
 
-        private static void WriteExceptionPassToConsole(string caseID, string method, Exception ex)
+        private static void WriteExceptionPassToConsole(string caseID, string method, string ex)
         {
-            Console.WriteLine(caseID + "\tPass\t" + method + "\tException:\t" + ex.Message);
+            Console.WriteLine(caseID + "\tPass\t" + method + "\tException:\t" + ex);
         }
 
         private static void WriteTestNotRunToConsole(string caseID, string method, string expected)
@@ -357,7 +356,7 @@ namespace ApiTest
             Console.WriteLine(caseID + "\tNot Run\t" + method + "\t" + expected + "\t\t" + "Not yet implemented");
         }
 
-        private static TimeSpan WriteTestRunResultToConsole(int numPass, int numFail, int numNotRun, double percent, TimeSpan elapsedTime)
+        private static void WriteTestRunResultToConsole(int numPass, int numFail, int numNotRun, double percent, TimeSpan elapsedTime)
         {
             Console.WriteLine("\n============================= End Test Run ===============================");
             Console.WriteLine("\nElapsed time = " + elapsedTime.ToString());
@@ -366,7 +365,6 @@ namespace ApiTest
             Console.WriteLine("\tFail = " + numFail);
             Console.WriteLine("\nTotal Test Cases Not Run = " + numNotRun);
             Console.WriteLine("\nPercent passed = " + percent.ToString("P"));
-            return elapsedTime;
         }
 
         private static void WriteFailResultToConsole(string caseID, string method, string expected, double actual)
@@ -374,7 +372,7 @@ namespace ApiTest
             Console.WriteLine(caseID + "\t*FAIL*\t" + method + "\t" + expected + "\t\t" + actual.ToString("F4"));
         }
 
-        private static void WritePassResultToConsole(string caseID, string method, string expected, ref double actual)
+        private static void WritePassResultToConsole(string caseID, string method, string expected, double actual)
         {
             Console.WriteLine(caseID + "\tPass\t" + method + "\t" + expected + "\t\t" + actual.ToString("F4"));
         }
