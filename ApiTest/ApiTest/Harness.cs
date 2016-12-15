@@ -67,6 +67,13 @@ namespace ApiTest
                 string stamp = DateTime.Now.ToString("s");
                 stamp = stamp.Replace(":", "-");
 
+                // Create the TestResults folder if it does not exit
+                string FolderPath = "..\\..\\TestResults";
+                if (!Directory.Exists(FolderPath))
+                {
+                    Directory.CreateDirectory(FolderPath);
+                }
+
                 // Open the test case results file in TestResults folder
                 FileStream ofs = new FileStream("..\\..\\TestResults\\TestResults-" + stamp + ".txt", FileMode.CreateNew);
                 StreamWriter sw = new StreamWriter(ofs);
