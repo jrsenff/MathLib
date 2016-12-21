@@ -1,19 +1,21 @@
 ﻿/****************************** Module Header ******************************\
 
-Module Name:  BufferedHarness.cs
-Project:      ApiTestBufferedModel
+Module Name:  Program.cs
+Project:      ApiTestBufferedModelRefactor
 Author:       Jerold Senff
-Updated:      12/18/2016
+Updated:      12/21/2016
 
 ApiTest:
 Tests the API functionality of the MathLib project.
 
 Program.cs reads test cases from a text file using a buffered model where 
-test case data is read into an ArrayList of TestCase objects. The test cases
-are run with the results stored in a second ArrayList of TestCaseResult objects.
+test case data is stored in a generic List of TestCase objects. The test cases
+are run with the results stored in a generic List of TestCaseResult objects.
+The TestCase and TestCaseResult classes both implement IEnumerable which
+enable the use of foreach loops to iterate through the List collections.
 
-This is a buffered version of James D. MacCaffrey's chapter 1 example 
-program, ApiTest, from .NET Test Automation Recipes (2006, Apress).  
+This is my refactored, buffered version of James D. MacCaffrey's chapter 1 
+example program, ApiTest, from .NET Test Automation Recipes (2006, Apress).  
 
 The MathLib math library has added functionality, complete with unit tests.
 This harness checks the type of exception returned by MathLib against an 
@@ -25,7 +27,7 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 
-namespace ApiTestBufferedModel
+namespace ApiTestBufferedMethodRefactor
 {
     class Program
     {
@@ -38,14 +40,14 @@ namespace ApiTestBufferedModel
             int numPass = 0, numFail = 0, numCases = 0, numNotRun = 0;
             DateTime startTime = DateTime.Now;
             DateTime endTime = DateTime.Now;
-            Entities.Counters cntrs = new Entities.Counters(numPass, numFail, numCases, numNotRun, startTime, endTime);
+            Counters cntrs = new Counters(numPass, numFail, numCases, numNotRun, startTime, endTime);
 
             // Test case result file
             string folderPath = "..\\..\\TestResults";  // test case results path
             string stamp = DateTime.Now.ToString("s");
             stamp = stamp.Replace(":", "-");
             string testResultFile = "..\\..\\TestResults\\MathLibApiTestResults-" + stamp + ".txt";
-            
+
             try
             {
                 // Get test case file name
